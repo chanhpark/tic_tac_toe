@@ -29,3 +29,28 @@ $('.board').on('click', ".square:not('.square-x, .square-o')", function(event) {
     currentPlayerToken = 'x';
   }
 });
+
+// Initialize a hash to store all of the chosen squares for each player
+var chosenSquares = {
+  'x': [],
+  'o': []
+}
+
+$('.board').on('click', ".square:not('.square-x, .square-o')", function(event) {
+  // Select the square
+  var $square = $(event.currentTarget);
+  $square.addClass('square-' + currentPlayerToken);
+
+  // Record player's choice
+  var indexOfSquare = $('.board .square').index($square);
+  var currentPlayerSquares = chosenSquares[currentPlayerToken]
+  currentPlayerSquares.push(indexOfSquare);
+  console.log(chosenSquares);
+
+  // Swap current player's token
+  if (currentPlayerToken === 'x') {
+    currentPlayerToken = 'o';
+  } else {
+    currentPlayerToken = 'x';
+  }
+});
